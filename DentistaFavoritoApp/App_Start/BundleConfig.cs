@@ -20,7 +20,8 @@ namespace DentistaFavoritoApp.App_Start
                         "~/Scripts/App/Services/ResourcesService.js",
                         "~/Scripts/App/Controllers/HomeController.js",
                         "~/Scripts/App/Controllers/PacienteController.js",
-                        "~/Scripts/App/Controllers/CrearPacienteController.js"));
+                        "~/Scripts/App/Controllers/CrearPacienteController.js",
+                        "~/Scripts/App/Controllers/TratamientoController.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                      "~/Content/bootstrap.css",

@@ -32,3 +32,13 @@ textarea {
     font-size: 25px;
 }
 
+.invalido{
+    color: red;
+    font-weight: initial;
+    font-size: 11px;
+}
+
+.cursor{
+    cursor: pointer;
+}
+

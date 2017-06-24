@@ -16,10 +16,19 @@
 
 
     app.factory('Pacientes', ['$resource', 'baseUrl', function ($resource, baseUrl) {
-        return $resource( 'api/pacientes', {}, {
-            getAll: { method: 'GET', url: 'api/pacientes/getAll', params: {}, isArray: true },
+        return $resource( '/api/pacientes', {}, {
+            getAll: { method: 'GET', url: '/api/pacientes/getAll', params: {}, isArray: true },
             save: { method: 'Post', url: '/api/pacientes/save' },
             deletePacient: { method: 'GET', url: '/api/pacientes/delete' }
+        });
+    }]);
+
+    app.factory('Tratamientos', ['$resource', 'baseUrl', function ($resource, baseUrl) {
+        return $resource('/api/tratamientos', {}, {
+            getAll: { method: 'GET', url: '/api/tratamientos/getAll', params: {}, isArray: true },
+            getAllbyPaciente: { method: 'GET', url: '/api/tratamientos/getAllbyPaciente', isArray: true },
+            save: { method: 'Post', url: '/api/Tratamientos/save' },
+            deletePacient: { method: 'GET', url: '/api/Tratamientos/delete' }
         });
     }]);
 

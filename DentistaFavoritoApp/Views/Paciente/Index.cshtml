@@ -30,9 +30,9 @@
                         <td>{{paciente.Edad}}</td>
                         <td>{{paciente.DatosContacto}}</td>
                         <td>{{paciente.UltimaConsulta | date :'yyyy-MM-dd'}}</td>
-                        <td>{{paciente.ProximaConsulta | date :'yyyy-MM-dd'}}</td>
-                        <td><span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="Eliminar(paciente.Id,$index)"></span></td>
-                        <td></td>
+                        <td>{{paciente.ProximaConsulta | date :'yyyy-MM-dd'}}</td>                        
+                        <td><a href="/Tratamiento/PorPaciente/{{paciente.Id}}">Tratamientos</a></td>
+                        <td><span class="glyphicon glyphicon-remove cursor" aria-hidden="true" ng-click="Eliminar(paciente.Id,$index)"></span></td>
                         <td></td>
                     </tr>
                 </table>

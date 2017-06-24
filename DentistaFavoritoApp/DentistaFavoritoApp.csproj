@@ -135,6 +135,7 @@
     <Content Include="Scripts\App\Controllers\CrearPacienteController.js" />
     <Content Include="Scripts\App\Controllers\HomeController.js" />
     <Content Include="Scripts\App\Controllers\PacienteController.js" />
+    <Content Include="Scripts\App\Controllers\TratamientoController.js" />
     <Content Include="Scripts\App\Services\ResourcesService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -146,11 +147,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\PacienteController.cs" />
+    <Compile Include="ApiControllers\TratamientosController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
+    <Compile Include="Controllers\TratamientoController.cs" />
     <Compile Include="Entity\DentistaContext.cs" />
     <Compile Include="Entity\DentistaInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,6 +192,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Paciente\Index.cshtml" />
     <Content Include="Views\Paciente\CrearPaciente.cshtml" />
+    <Content Include="Views\Tratamiento\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

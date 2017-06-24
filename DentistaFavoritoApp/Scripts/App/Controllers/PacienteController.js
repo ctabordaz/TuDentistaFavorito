@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    angular.module('DentistaApp').controller('PacienteController', ['$scope', 'Pacientes', function ($scope, Pacientes) {
+    angular.module('DentistaApp').controller('PacienteController', ['$scope', 'Pacientes',  function ($scope, Pacientes) {
 
         $scope.titulo = "Pacientes";
         $scope.pacientesLista = [];
@@ -14,7 +14,9 @@
         $scope.Eliminar = function (id,index) {
             Pacientes.deletePacient({ Id  : id}, function (data) {
                 $scope.mensaje = "Se ha eliminado correctamente el paciente";
-                $scope.pacientesLista = $scope.pacientesLista.splice(index+1, 1);
+                $scope.pacientesLista = $scope.pacientesLista.filter(function (element, i) {
+                    return i !== index;
+                });
             }, function (error) {
                 $scope.mensajeError = "Ha ocurrido un error eliminando el paciente";
             });

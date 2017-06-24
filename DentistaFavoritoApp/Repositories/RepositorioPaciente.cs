@@ -9,9 +9,9 @@ namespace DentistaFavoritoApp.Repositories
 {
     public class RepositorioPaciente: RepositorioBase<Paciente>, IRepository<Paciente>
     {
-        public override ICollection<Paciente> GetAll()
-        {
-            return dbSet.Include(p => p.Tratamientos).ToList();
-        }
+        //public override ICollection<Paciente> GetAll()
+        //{
+        //    return dbSet.Include(p => p.Tratamientos).ToList();
+        //}
     }
 }

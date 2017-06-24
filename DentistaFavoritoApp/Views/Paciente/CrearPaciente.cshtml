@@ -13,27 +13,27 @@
             <h2>{{titulo}}</h2>
             <form>
                 <div class="form-group">
-                    <label>Nombre</label>
+                    <label>Nombre <span class="invalido">{{pacienteNombre}}</span></label>
                     <input type="text" class="form-control" ng-model="nuevoPaciente.Nombre" placeholder="Nombre">
                 </div>
                 <div class="form-group">
-                    <label>Identificación</label>
-                    <input type="text" class="form-control"  ng-model="nuevoPaciente.Identificacion" placeholder="Identificación">
+                    <label>Identificación <span class="invalido">{{pacienteIdentificacion}}</span></label>
+                    <input type="number" class="form-control"  ng-model="nuevoPaciente.Identificacion" placeholder="Identificación">
                 </div>
                 <div class="form-group">
-                    <label>Edad</label>
-                    <input type="text" class="form-control"  ng-model="nuevoPaciente.Edad" placeholder="Edad">
+                    <label>Edad <span class="invalido">{{pacienteEdad}}</span></label>
+                    <input type="number" class="form-control"  ng-model="nuevoPaciente.Edad" placeholder="Edad">
                 </div>
                 <div class="form-group">
-                    <label>Datos Contacto</label>
+                    <label>Datos Contacto <span class="invalido">{{pacienteContacto}}</span></label>
                     <textarea  class="form-control"  ng-model="nuevoPaciente.DatosContacto" placeholder="Datos Contacto"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Fecha Última Visita</label>
+                    <label>Fecha Última Visita <span class="invalido">{{pacienteUltimaFecha}}</span></label>
                     <input type="date"  ng-model="nuevoPaciente.UltimaConsulta" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Fecha Próxima Visita</label>
+                    <label>Fecha Próxima Visita <span class="invalido">{{pacienteProximaFecha}}</span></label>
                     <input type="date" ng-model="nuevoPaciente.ProximaConsulta" class="form-control">
                 </div>
                 <button ng-click="GuardarPaciente()" class="btn btn-default">Guardar</button>
@@ -53,21 +53,21 @@
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
-                                <form>
+                                <form name="TratamientoForm">
                                     <div class="form-group">
-                                        <label>Fecha Inicio</label>
+                                        <label>Fecha Inicio <span class="invalido">{{tratamientoFechaIni}}</span></label>
                                         <input type="date" ng-model="nuevoTratamiento.FechaInicio" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Fecha Conclusión</label>
+                                        <label>Fecha Conclusión <span class="invalido">{{tratamientoFechaFin}}</span></label>
                                         <input type="date" ng-model="nuevoTratamiento.FechaConclusion" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Costo</label>
-                                        <input type="text" class="form-control" ng-model="nuevoTratamiento.Costo" placeholder="Costo">
+                                        <label>Costo <span class="invalido">{{tratamientoCosto}}</span></label>
+                                        <input type="number" min="0" class="form-control" ng-model="nuevoTratamiento.Costo" placeholder="Costo">
                                     </div>
                                     <div class="form-group">
-                                        <label>Detalle</label>
+                                        <label>Detalle <span class="invalido">{{tratamientoDetalle}}</span></label>
                                         <input type="text" class="form-control" ng-model="nuevoTratamiento.Detalle" placeholder="Detalle">
                                     </div>
                                     <button ng-click="GuardarTratamiento()" class="btn btn-default">Guardar</button>
@@ -102,7 +102,7 @@
                                             <td>{{tratamiento.FechaConclusion | date :'yyyy-MM-dd'}}</td>
                                             <td>{{tratamiento.Costo | currency}}</td>
                                             <td>{{tratamiento.Detalle}}</td>
-                                            <td><span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="EliminarTratamiento($index)"></span></td>
+                                            <td><span class="glyphicon glyphicon-remove cursor" aria-hidden="true" ng-click="EliminarTratamiento($index)"></span></td>
                                             <td></td>
                                         </tr>
                                     </table>

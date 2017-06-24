@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Tratamientos";
+}
+
+<div ng-controller="TratamientoController" ng-cloak>
+    <h2>Tratamientos</h2>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Conclusión</th>
+                        <th>Costo</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="tratamiento in listaTratamiento track by $index">
+                    <td>{{tratamiento.FechaInicio | date :'yyyy-MM-dd'}}</td>
+                    <td>{{tratamiento.FechaConclusion | date :'yyyy-MM-dd'}}</td>
+                    <td>{{tratamiento.Costo}}</td>
+                    <td>{{tratamiento.Detalle}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
