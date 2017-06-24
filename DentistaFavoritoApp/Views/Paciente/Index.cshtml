@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Pacientes";
+}
+
+<div ng-controller="PacienteController" ng-cloak>
+    <h2>{{titulo}}</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Identificación</th>
+                            <th>Edad</th>
+                            <th>Contacto</th>
+                            <th>Fecha Última Visita</th>
+                            <th>Fecha Próxima Visita</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="paciente in pacientesLista">
+                        <td>{{paciente.Nombre}}</td>
+                        <td>{{paciente.Identificacion}}</td>
+                        <td>{{paciente.Edad}}</td>
+                        <td>{{paciente.DatosContacto}}</td>
+                        <td>{{paciente.UltimaConsulta}}</td>
+                        <td>{{paciente.ProximaConsulta}}</td>
+                        <td><span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="Eliminar(paciente.Id)"></span></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "CrearPaciente";
+}
+
+<div ng-controller="CrearPacienteController" ng-cloak>
+    <h2>{{titulo}}</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre</label>
+                    <input type="text" class="form-control" ng-model="nuevoPaciente.Nombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Identificación</label>
+                    <input type="text" class="form-control"  ng-model="nuevoPaciente.Identificacion" placeholder="Identificación">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Edad</label>
+                    <input type="text" class="form-control"  ng-model="nuevoPaciente.Edad" placeholder="Edad">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Datos Contacto</label>
+                    <textarea  class="form-control"  ng-model="nuevoPaciente.DatosContacto" placeholder="Datos Contacto"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Fecha Última Visita</label>
+                    <input type="date"  ng-model="nuevoPaciente.UltimaConsulta" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Fecha Próxima Visita</label>
+                    <input type="date" ng-model="nuevoPaciente.ProximaConsulta" class="form-control">
+                </div>
+                <button ng-click="GuardarPaciente()" class="btn btn-default">Guardar</button>
+            </form>
+        </div>
+    </div>
+    
+
+</div>
+

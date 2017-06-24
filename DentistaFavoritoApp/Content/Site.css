@@ -1,4 +1,8 @@
-﻿body {
+﻿[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -14,5 +18,15 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.navbar-blue{
+    background-color :#428bca ;
+    border-color : #428bca;
+}
+
+.black-font{
+    color : black;
+    font-size: 25px;
 }
 

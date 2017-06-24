@@ -51,6 +51,7 @@ namespace DentistaFavoritoApp.Repositories
         public void Remove(T entity)
         {
             dbSet.Remove(entity);
+            dbContext.SaveChanges();
         }
 
         public T Update(T entity)
