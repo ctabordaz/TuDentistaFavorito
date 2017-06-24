@@ -17,8 +17,9 @@ namespace DentistaFavoritoApp.Models
         public double Costo { get; set; }
         [DataMember]
         public string Detalle { get; set; }
-        
-        
+        [DataMember]
+        public virtual int Paciente_Id { get; set; }
+
 
     }
 }

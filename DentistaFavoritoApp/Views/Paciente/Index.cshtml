@@ -6,6 +6,8 @@
 <div ng-controller="PacienteController" ng-cloak>
     <h2>{{titulo}}</h2>
     <div class="row">
+        <div class="alert alert-success" role="alert" ng-if="mensaje.length > 0">{{mensaje}}</div>
+        <div class="alert alert-danger" role="alert" ng-if="mensajeError.length > 0">{{mensajeError}}</div>
         <div class="col-md-12">
             <div class="table-responsive">
                 <table class="table">
@@ -22,14 +24,14 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tr ng-repeat="paciente in pacientesLista">
+                    <tr ng-repeat="paciente in pacientesLista track by $index">
                         <td>{{paciente.Nombre}}</td>
                         <td>{{paciente.Identificacion}}</td>
                         <td>{{paciente.Edad}}</td>
                         <td>{{paciente.DatosContacto}}</td>
-                        <td>{{paciente.UltimaConsulta}}</td>
-                        <td>{{paciente.ProximaConsulta}}</td>
-                        <td><span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="Eliminar(paciente.Id)"></span></td>
+                        <td>{{paciente.UltimaConsulta | date :'yyyy-MM-dd'}}</td>
+                        <td>{{paciente.ProximaConsulta | date :'yyyy-MM-dd'}}</td>
+                        <td><span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="Eliminar(paciente.Id,$index)"></span></td>
                         <td></td>
                         <td></td>
                     </tr>

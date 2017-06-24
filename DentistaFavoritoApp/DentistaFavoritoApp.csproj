@@ -160,6 +160,14 @@
     <Compile Include="Migrations\201706240306515_Init.Designer.cs">
       <DependentUpon>201706240306515_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706241911265_ClavePrimaria.cs" />
+    <Compile Include="Migrations\201706241911265_ClavePrimaria.Designer.cs">
+      <DependentUpon>201706241911265_ClavePrimaria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706242033401_IdentificacionUnica.cs" />
+    <Compile Include="Migrations\201706242033401_IdentificacionUnica.Designer.cs">
+      <DependentUpon>201706242033401_IdentificacionUnica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Paciente.cs" />
     <Compile Include="Models\Tratamiento.cs" />
@@ -194,6 +202,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706240306515_Init.resx">
       <DependentUpon>201706240306515_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706241911265_ClavePrimaria.resx">
+      <DependentUpon>201706241911265_ClavePrimaria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706242033401_IdentificacionUnica.resx">
+      <DependentUpon>201706242033401_IdentificacionUnica.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

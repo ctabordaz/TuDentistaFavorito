@@ -19,7 +19,7 @@
         return $resource( 'api/pacientes', {}, {
             getAll: { method: 'GET', url: 'api/pacientes/getAll', params: {}, isArray: true },
             save: { method: 'Post', url: '/api/pacientes/save' },
-            deletePacient: { method: 'GET', url: '/api/pacientes/deletePaciente' }
+            deletePacient: { method: 'GET', url: '/api/pacientes/delete' }
         });
     }]);
 

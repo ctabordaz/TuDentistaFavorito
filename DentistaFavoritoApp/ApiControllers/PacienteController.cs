@@ -32,7 +32,7 @@ namespace DentistaFavoritoApp.ApiControllers
                 var listaPacientes = repositorioPaciente.GetAll();
                 return Request.CreateResponse(HttpStatusCode.OK, listaPacientes);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
@@ -54,7 +54,7 @@ namespace DentistaFavoritoApp.ApiControllers
         }
 
         [HttpGet]
-        [Route("deletePaciente")]
+        [Route("delete")]
         public HttpResponseMessage deletePaciente(int Id)
         {
             try

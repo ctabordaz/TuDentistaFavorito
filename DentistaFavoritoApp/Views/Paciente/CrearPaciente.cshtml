@@ -4,37 +4,117 @@
 }
 
 <div ng-controller="CrearPacienteController" ng-cloak>
-    <h2>{{titulo}}</h2>
+    
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="alert alert-success" role="alert" ng-if="mensaje.length > 0">{{mensaje}}</div>
+        <div class="alert alert-danger" role="alert"  ng-if="mensajeError.length > 0">{{mensajeError}}</div>
+        <div class="col-md-5">
+            <h2>{{titulo}}</h2>
             <form>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre</label>
+                    <label>Nombre</label>
                     <input type="text" class="form-control" ng-model="nuevoPaciente.Nombre" placeholder="Nombre">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Identificación</label>
+                    <label>Identificación</label>
                     <input type="text" class="form-control"  ng-model="nuevoPaciente.Identificacion" placeholder="Identificación">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Edad</label>
+                    <label>Edad</label>
                     <input type="text" class="form-control"  ng-model="nuevoPaciente.Edad" placeholder="Edad">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Datos Contacto</label>
+                    <label>Datos Contacto</label>
                     <textarea  class="form-control"  ng-model="nuevoPaciente.DatosContacto" placeholder="Datos Contacto"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Fecha Última Visita</label>
+                    <label>Fecha Última Visita</label>
                     <input type="date"  ng-model="nuevoPaciente.UltimaConsulta" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Fecha Próxima Visita</label>
+                    <label>Fecha Próxima Visita</label>
                     <input type="date" ng-model="nuevoPaciente.ProximaConsulta" class="form-control">
                 </div>
                 <button ng-click="GuardarPaciente()" class="btn btn-default">Guardar</button>
             </form>
+        </div>
+        <div class="col-md-7">
+            <h2>Tratamientos</h2>
+            <div class="row">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Agregar Tratamiento
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Fecha Inicio</label>
+                                        <input type="date" ng-model="nuevoTratamiento.FechaInicio" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha Conclusión</label>
+                                        <input type="date" ng-model="nuevoTratamiento.FechaConclusion" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Costo</label>
+                                        <input type="text" class="form-control" ng-model="nuevoTratamiento.Costo" placeholder="Costo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Detalle</label>
+                                        <input type="text" class="form-control" ng-model="nuevoTratamiento.Detalle" placeholder="Detalle">
+                                    </div>
+                                    <button ng-click="GuardarTratamiento()" class="btn btn-default">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Lista de Tratamientos
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha Inicio</th>
+                                                <th>Fecha Conclusion</th>
+                                                <th>Costo</th>
+                                                <th>Detalle</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tr ng-repeat="tratamiento in  listaTratamientos track by $index">
+                                            <td>{{tratamiento.FechaInicio | date :'yyyy-MM-dd'}}</td>
+                                            <td>{{tratamiento.FechaConclusion | date :'yyyy-MM-dd'}}</td>
+                                            <td>{{tratamiento.Costo | currency}}</td>
+                                            <td>{{tratamiento.Detalle}}</td>
+                                            <td><span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="EliminarTratamiento($index)"></span></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+           
+            
+            
         </div>
     </div>
     

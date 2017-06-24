@@ -14,7 +14,7 @@ namespace DentistaFavoritoApp.Models
         [DataMember]
         public string Nombre { get; set; }
         [DataMember]
-        public string Identificacion { get; set; }
+        public long Identificacion { get; set; }
         [DataMember]
         public int Edad { get; set; }
         [DataMember]
