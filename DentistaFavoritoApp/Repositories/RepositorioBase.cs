@@ -38,7 +38,7 @@ namespace DentistaFavoritoApp.Repositories
             return dbSet.ToList();
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             return dbSet.Find(id);
         }

@@ -18,6 +18,7 @@
     app.factory('Pacientes', ['$resource', 'baseUrl', function ($resource, baseUrl) {
         return $resource( '/api/pacientes', {}, {
             getAll: { method: 'GET', url: '/api/pacientes/getAll', params: {}, isArray: true },
+            getbyId: { method: 'GET', url: '/api/pacientes/getbyId' },
             save: { method: 'Post', url: '/api/pacientes/save' },
             deletePacient: { method: 'GET', url: '/api/pacientes/delete' }
         });
@@ -27,8 +28,8 @@
         return $resource('/api/tratamientos', {}, {
             getAll: { method: 'GET', url: '/api/tratamientos/getAll', params: {}, isArray: true },
             getAllbyPaciente: { method: 'GET', url: '/api/tratamientos/getAllbyPaciente', isArray: true },
-            save: { method: 'Post', url: '/api/Tratamientos/save' },
-            deletePacient: { method: 'GET', url: '/api/Tratamientos/delete' }
+            save: { method: 'Post', url: '/api/tratamientos/save' },
+            deleteTratamiento: { method: 'GET', url: '/api/tratamientos/delete' }
         });
     }]);
 

@@ -38,6 +38,20 @@ namespace DentistaFavoritoApp.ApiControllers
             }
         }
 
+        [Route("getbyId")]
+        public HttpResponseMessage GetbyId(int id)
+        {
+            try
+            {
+                var paciente = repositorioPaciente.GetById(id);
+                return Request.CreateResponse(HttpStatusCode.OK, paciente);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+        }
+
         [HttpPost]
         [Route("save")]
         public HttpResponseMessage Save(Paciente paciente)

@@ -5,25 +5,49 @@
 
 <div ng-controller="TratamientoController" ng-cloak>
     <h2>Tratamientos</h2>
-    <div class="col-md-12">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Conclusión</th>
-                        <th>Costo</th>
-                        <th>Detalle</th>
-                    </tr>
-                </thead>
-                <tr ng-repeat="tratamiento in listaTratamiento track by $index">
-                    <td>{{tratamiento.FechaInicio | date :'yyyy-MM-dd'}}</td>
-                    <td>{{tratamiento.FechaConclusion | date :'yyyy-MM-dd'}}</td>
-                    <td>{{tratamiento.Costo}}</td>
-                    <td>{{tratamiento.Detalle}}</td>
-                </tr>
-            </table>
+    <div class="alert alert-success" role="alert" ng-if="mensaje.length > 0">{{mensaje}}</div>
+    <div class="alert alert-danger" role="alert" ng-if="mensajeError.length > 0">{{mensajeError}}</div>
+    <div class="row" ng-if="existeCliente">
+        <div class="col-md-4">
+            <strong>Identificación:</strong> 
+            {{paciente.Identificacion}}
+        </div>
+        <div class="col-md-3">
+            <strong>Nombre:</strong>
+            {{paciente.Nombre}}
+        </div>
+        <div class="col-md-2">
+            <strong>Edad:   </strong>
+            {{paciente.Edad}}
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive" ng-if="listaTratamiento.length>0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Conclusión</th>
+                            <th>Costo</th>
+                            <th>Detalle</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="tratamiento in listaTratamiento track by $index">
+                        <td>{{tratamiento.FechaInicio | date :'yyyy-MM-dd'}}</td>
+                        <td>{{tratamiento.FechaConclusion | date :'yyyy-MM-dd'}}</td>
+                        <td>{{tratamiento.Costo | currency}}</td>
+                        <td>{{tratamiento.Detalle}}</td>
+                        <td><span class="glyphicon glyphicon-remove cursor" aria-hidden="true" ng-click="Eliminar(tratamiento.Id,$index)"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div ng-if="!listaTratamiento.length>0">
+                <div class="alert alert-info" role="alert">No hay tratamientos para este paciente</div>
+            </div>
+        </div>
+    </div>
+    
 </div>
 

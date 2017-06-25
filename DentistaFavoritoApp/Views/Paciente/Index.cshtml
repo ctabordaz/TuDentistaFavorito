@@ -9,7 +9,7 @@
         <div class="alert alert-success" role="alert" ng-if="mensaje.length > 0">{{mensaje}}</div>
         <div class="alert alert-danger" role="alert" ng-if="mensajeError.length > 0">{{mensajeError}}</div>
         <div class="col-md-12">
-            <div class="table-responsive">
+            <div class="table-responsive" ng-if="pacientesLista.length > 0">
                 <table class="table">
                     <thead>
                         <tr>
@@ -36,6 +36,9 @@
                         <td></td>
                     </tr>
                 </table>
+            </div>
+            <div ng-if="!pacientesLista.length>0">
+                <div class="alert alert-info" role="alert">No hay pacientes registrados</div>
             </div>
         </div>
     </div>

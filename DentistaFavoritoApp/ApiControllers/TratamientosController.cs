@@ -52,5 +52,22 @@ namespace DentistaFavoritoApp.ApiControllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
         }
+
+
+        [HttpGet]
+        [Route("delete")]
+        public HttpResponseMessage deleteTratamiento(int Id)
+        {
+            try
+            {
+                var tratamiento = repositorioTratamientos.GetById(Id);
+                repositorioTratamientos.Remove(tratamiento);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+        }
     }
 }
