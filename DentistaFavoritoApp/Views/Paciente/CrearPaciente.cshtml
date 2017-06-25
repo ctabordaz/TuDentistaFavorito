@@ -45,13 +45,13 @@
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingOne">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h4 class="panel-title cursor">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion"  aria-expanded="true" ng-click="toggleNuevoTratamiento = !toggleNuevoTratamiento">
                                     Agregar Tratamiento
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-collapse collapse in" role="tabpanel" ng-if="toggleNuevoTratamiento" >
                             <div class="panel-body">
                                 <form name="TratamientoForm">
                                     <div class="form-group">
@@ -70,22 +70,23 @@
                                         <label>Detalle <span class="invalido">{{tratamientoDetalle}}</span></label>
                                         <input type="text" class="form-control" ng-model="nuevoTratamiento.Detalle" placeholder="Detalle">
                                     </div>
-                                    <button ng-click="GuardarTratamiento()" class="btn btn-default">Agregar</button>
+                                    <button ng-if="!EditandoTratamiento" ng-click="GuardarTratamiento()" class="btn btn-default">Agregar</button>
+                                    <button ng-if="EditandoTratamiento" ng-click="ActualizarTratamiento()" class="btn btn-default">Guardar</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTwo">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="panel-title cursor">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"  aria-expanded="false"  ng-click="toggleListaTratamientos = !toggleListaTratamientos">
                                     Lista de Tratamientos
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div  class="panel-collapse collapse in" role="tabpanel" ng-if="toggleListaTratamientos">
                             <div class="panel-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive" ng-if="listaTratamientos.length > 0" >
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -101,11 +102,14 @@
                                             <td>{{tratamiento.FechaInicio | date :'yyyy-MM-dd'}}</td>
                                             <td>{{tratamiento.FechaConclusion | date :'yyyy-MM-dd'}}</td>
                                             <td>{{tratamiento.Costo | currency}}</td>
-                                            <td>{{tratamiento.Detalle}}</td>
+                                            <td>{{tratamiento.Detalle}}</td>                                            
+                                            <td><span class="glyphicon glyphicon-pencil cursor" aria-hidden="true" ng-click="EditarTratamiento($index)"></span></td>
                                             <td><span class="glyphicon glyphicon-remove cursor" aria-hidden="true" ng-click="EliminarTratamiento($index)"></span></td>
-                                            <td></td>
                                         </tr>
                                     </table>
+                                </div>
+                                <div  ng-if="!listaTratamientos.length > 0">
+                                    <div class="alert alert-info" role="alert">No hay tratamientos</div>
                                 </div>
                             </div>
                         </div>

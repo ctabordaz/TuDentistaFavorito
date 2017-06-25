@@ -23,7 +23,7 @@
                 $scope.listaTratamiento = data.Tratamientos;
             }, function (error) {
                 $scope.mensajeError = "Ha ocurrido un error cargando datos del paciente";
-            })
+            });
 
         }
         

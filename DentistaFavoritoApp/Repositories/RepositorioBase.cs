@@ -58,6 +58,7 @@ namespace DentistaFavoritoApp.Repositories
         {
             dbSet.Attach(entity);
             dbContext.Entry(entity).State = EntityState.Modified;
+            dbContext.SaveChanges();
             return entity;
         }
     }

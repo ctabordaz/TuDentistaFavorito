@@ -18,6 +18,10 @@ namespace DentistaFavoritoApp.Controllers
         {
             return View();
         }
+        public ActionResult Editar(int? id)
+        {
+            return View("CrearPaciente");
+        }
 
     }
 }

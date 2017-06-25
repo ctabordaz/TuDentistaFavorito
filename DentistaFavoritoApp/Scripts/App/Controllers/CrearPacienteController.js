@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    angular.module('DentistaApp').controller('CrearPacienteController', ['$scope', 'Pacientes', function ($scope, Pacientes) {
+    angular.module('DentistaApp').controller('CrearPacienteController', ['$scope', 'Pacientes', '$location', function ($scope, Pacientes, $location) {
 
         $scope.titulo = "Crear Paciente";
         $scope.nuevoPaciente = {};
@@ -19,12 +19,20 @@
         $scope.pacienteEdad = "";
         $scope.pacienteContacto = "";
         $scope.pacienteUltimaFecha = "";
-        $scope.pacienteProximaFecha = "";
+        $scope.pacienteProximaFecha = "";       
+        $scope.toggleNuevoTratamiento = true;
+        $scope.toggleListaTratamientos = true;
+        $scope.EditandoTratamiento = false;
+        $scope.Editando = false;
 
         var campoInvalido = "Campo Invalido";
+        var indexTratamiento = 0;
+        var urlArray = $location.absUrl().split('/');
+        var parametro = urlArray[urlArray.length - 1];
 
         var inicializarPaciente = function () {
             $scope.nuevoPaciente = {
+                Id: 0,
                 Nombre: "",
                 Identificacion: "",
                 Edad: "",
@@ -41,13 +49,81 @@
                 FechaConclusion: "",
                 Costo: "",
                 Detalle: ""
-
             };
+        };
+
+        inicializarPaciente();
+        inicializarTratamiento();
+
+        if (parametro !== "" && !isNaN(parametro)) {
+            $scope.Editando = true;
+            $scope.titulo = "Editar Paciente";
+            Pacientes.getbyId({ id: parametro }, function (data) {
+                $scope.nuevoPaciente = data;
+                $scope.nuevoPaciente.ProximaConsulta = new Date(data.ProximaConsulta);
+                $scope.nuevoPaciente.UltimaConsulta = new Date(data.UltimaConsulta);
+                $scope.listaTratamientos = data.Tratamientos;
+            }, function (error) {
+                $scope.mensajeError = "Ha ocurrido un error cargando datos del paciente";
+            });
+        }
+
+        $scope.GuardarTratamiento = function () {
+            if (validarTratamiento()) {
+                $scope.nuevoTratamiento.Paciente_Id = $scope.nuevoPaciente.Id;
+                $scope.listaTratamientos.push(angular.copy($scope.nuevoTratamiento));
+                inicializarTratamiento();
+            }
+        };
+
+        $scope.GuardarPaciente = function () {
+            $scope.mensajeError = "";
+            $scope.mensaje = "";
+
+            if (validarPaciente()) {
+                $scope.nuevoPaciente.Tratamientos = angular.copy($scope.listaTratamientos);
+                Pacientes.save($scope.nuevoPaciente, function (data) {
+                    $scope.mensaje = "El paciente se ha guardado correctamente";
+                    if (!$scope.Editando) {
+                        inicializarPaciente();
+                        inicializarTratamiento();
+                        $scope.listaTratamientos = [];
+                    }                    
+                    
+                }, function (error) {
+                    $scope.mensajeError = "Ha ocurrido guardando el paciente";
+                });
+            }
 
         };
-        
-        var validarTratamiento = function () {
+
+
+        $scope.EliminarTratamiento = function (index) {
+            $scope.listaTratamientos = $scope.listaTratamientos.filter(function (element, i) {
+                return i !== index;
+            });
+        }
+
+        $scope.EditarTratamiento = function (index) {
+            indexTratamiento = index;
+            $scope.EditandoTratamiento = true;
+            $scope.nuevoTratamiento = angular.copy($scope.listaTratamientos[index]);
+            $scope.nuevoTratamiento.FechaInicio = new Date($scope.listaTratamientos[index].FechaInicio);
+            $scope.nuevoTratamiento.FechaConclusion = new Date($scope.listaTratamientos[index].FechaConclusion);
+        }
+
+        $scope.ActualizarTratamiento = function () {
+            if (validarTratamiento()) {
+                $scope.listaTratamientos[indexTratamiento] = angular.copy($scope.nuevoTratamiento);
+                inicializarTratamiento();
+                indexTratamiento = 0;
+                $scope.EditandoTratamiento = false;
+            }
             
+        }
+
+        var validarTratamiento = function () {
+
             $scope.tratamientoFechaIni = "";
             $scope.tratamientoFechaFin = "";
             $scope.tratamientoCosto = "";
@@ -68,7 +144,7 @@
                 valido = false;
             }
 
-            if ($scope.nuevoTratamiento.Detalle == ""  || $scope.nuevoTratamiento.Detalle == null) {
+            if ($scope.nuevoTratamiento.Detalle == "" || $scope.nuevoTratamiento.Detalle == null) {
                 $scope.tratamientoDetalle = campoInvalido;
                 valido = false;
             }
@@ -116,42 +192,6 @@
 
             return valido
         }
-
-        $scope.GuardarTratamiento = function () {
-            if (validarTratamiento()) {
-                $scope.listaTratamientos.push(angular.copy($scope.nuevoTratamiento));
-                inicializarTratamiento();
-            }
-        };
-
-        $scope.GuardarPaciente = function () {
-            $scope.mensajeError = "";
-            $scope.mensaje = "";
-
-            if (validarPaciente()) {
-                $scope.nuevoPaciente.Tratamientos = angular.copy($scope.listaTratamientos);
-                Pacientes.save($scope.nuevoPaciente, function (data) {
-                    $scope.mensaje = "El paciente se ha guardado correctamente";
-                    inicializarPaciente();
-                    inicializarTratamiento();
-                    $scope.listaTratamientos = [];
-                }, function (error) {
-                    $scope.mensajeError = "Ha ocurrido guardando el paciente";
-                });
-            }
-
-        };
-
-        
-        $scope.EliminarTratamiento = function (index) {
-            $scope.listaTratamientos = $scope.listaTratamientos.filter(function (element, i) {
-                return i !== index;
-            });
-        }
-
-        inicializarPaciente();
-        inicializarTratamiento();
-
 
     }]);
 })();

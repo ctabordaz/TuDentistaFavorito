@@ -13,15 +13,19 @@ namespace DentistaFavoritoApp.ApiControllers
     public class PacienteController : ApiController
     {
         private IRepository<Paciente> repositorioPaciente;
+        private IRepository<Tratamiento> repositorioTratamientos;
 
         public PacienteController()
         {
             repositorioPaciente = new RepositorioPaciente();
+            this.repositorioTratamientos = new RepositorioTratamiento();
         }
 
-        public PacienteController(IRepository<Paciente> repositorioPacietne)
+        public PacienteController(IRepository<Paciente> repositorioPaciente, IRepository<Tratamiento> repositorioTratamientos)
         {
-            this.repositorioPaciente = repositorioPacietne;
+            this.repositorioPaciente = repositorioPaciente;
+            this.repositorioTratamientos = repositorioTratamientos;
+
         }
 
         [Route("getAll")]
@@ -57,11 +61,27 @@ namespace DentistaFavoritoApp.ApiControllers
         public HttpResponseMessage Save(Paciente paciente)
         {
             try
-            {
-                repositorioPaciente.Add(paciente);
+            {   if(paciente.Id == 0)
+                {
+                    repositorioPaciente.Add(paciente);
+                }else
+                {
+                    repositorioPaciente.Update(paciente);
+                    foreach (var tratamiento in paciente.Tratamientos)
+                    {
+                        if(tratamiento.Id== 0)
+                        {
+                            repositorioTratamientos.Add(tratamiento);
+                        }else
+                        {
+                            repositorioTratamientos.Update(tratamiento);
+                        }
+                    }
+                }
+                
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
