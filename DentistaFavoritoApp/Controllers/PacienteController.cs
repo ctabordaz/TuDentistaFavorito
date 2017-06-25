@@ -14,13 +14,13 @@ namespace DentistaFavoritoApp.Controllers
             return View();
         }
 
-        public ActionResult CrearPaciente()
+        public ActionResult Crear()
         {
             return View();
         }
         public ActionResult Editar(int? id)
         {
-            return View("CrearPaciente");
+            return View("Crear");
         }
 
     }

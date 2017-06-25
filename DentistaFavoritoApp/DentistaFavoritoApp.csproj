@@ -191,7 +191,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Paciente\Index.cshtml" />
-    <Content Include="Views\Paciente\CrearPaciente.cshtml" />
+    <Content Include="Views\Paciente\Crear.cshtml" />
     <Content Include="Views\Tratamiento\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

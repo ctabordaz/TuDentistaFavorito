@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Linq.Expressions;
+using System.Data.Entity.Migrations;
 
 namespace DentistaFavoritoApp.Repositories
 {
@@ -26,9 +27,9 @@ namespace DentistaFavoritoApp.Repositories
             dbSet = dbContext.Set<T>();
         }
 
-        public T Add(T entity)
+        public T AddOrUpdate(T entity)
         {
-            dbSet.Add(entity);
+            dbSet.AddOrUpdate(entity);
             dbContext.SaveChanges();
             return entity;
         }
@@ -51,15 +52,15 @@ namespace DentistaFavoritoApp.Repositories
         public void Remove(T entity)
         {
             dbSet.Remove(entity);
-            dbContext.SaveChanges();
+            dbContext.SaveChanges();            
         }
 
-        public T Update(T entity)
+        public void RemoveRange(IEnumerable<T> entity)
         {
-            dbSet.Attach(entity);
-            dbContext.Entry(entity).State = EntityState.Modified;
-            dbContext.SaveChanges();
-            return entity;
+            foreach (var entityToRemove in entity)
+            {
+                Remove(entityToRemove);
+            }
         }
     }
 }

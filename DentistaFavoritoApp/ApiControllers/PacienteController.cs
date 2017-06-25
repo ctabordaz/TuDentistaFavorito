@@ -61,21 +61,18 @@ namespace DentistaFavoritoApp.ApiControllers
         public HttpResponseMessage Save(Paciente paciente)
         {
             try
-            {   if(paciente.Id == 0)
+            {
+             
+                repositorioPaciente.AddOrUpdate(paciente);
+                if(paciente.Id != 0)
                 {
-                    repositorioPaciente.Add(paciente);
-                }else
-                {
-                    repositorioPaciente.Update(paciente);
+                    var tratamientos = repositorioTratamientos.GetMany(t => t.Paciente_Id == paciente.Id);
+                    var tratamientosEliminar = tratamientos.Where(t => !paciente.Tratamientos.Any(nt => nt.Id == t.Id));
+                    repositorioTratamientos.RemoveRange(tratamientosEliminar);
+
                     foreach (var tratamiento in paciente.Tratamientos)
-                    {
-                        if(tratamiento.Id== 0)
-                        {
-                            repositorioTratamientos.Add(tratamiento);
-                        }else
-                        {
-                            repositorioTratamientos.Update(tratamiento);
-                        }
+                    {                       
+                        repositorioTratamientos.AddOrUpdate(tratamiento);
                     }
                 }
                 

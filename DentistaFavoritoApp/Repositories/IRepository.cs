@@ -9,9 +9,9 @@ namespace DentistaFavoritoApp.Repositories
 {
     public interface IRepository<T> where T: class
     {
-        T Add(T entity);
+        T AddOrUpdate(T entity);
         void Remove(T entity);
-        T Update(T entity);
+        void RemoveRange(IEnumerable<T> entity);        
         ICollection<T> GetAll();
         T GetById(int id);
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
