@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    angular.module('DentistaApp').controller('CrearPacienteController', ['$scope', 'Pacientes', '$location', function ($scope, Pacientes, $location) {
+    angular.module('DentistaApp').controller('CrearPacienteController', ['$scope', 'Pacientes', '$location', 'datosAuth', 'Token', '$http', function ($scope, Pacientes, $location, datosAuth, Token, $http) {
 
         $scope.titulo = "Crear Paciente";
         $scope.nuevoPaciente = {};
@@ -29,7 +29,7 @@
         var indexTratamiento = 0;
         var urlArray = $location.absUrl().split('/');
         var parametro = urlArray[urlArray.length - 1];
-
+        var token = "";
         var inicializarPaciente = function () {
             $scope.nuevoPaciente = {
                 Id: 0,
@@ -55,18 +55,27 @@
         inicializarPaciente();
         inicializarTratamiento();
 
-        if (parametro !== "" && !isNaN(parametro)) {
-            $scope.Editando = true;
-            $scope.titulo = "Editar Paciente";
-            Pacientes.getbyId({ id: parametro }, function (data) {
-                $scope.nuevoPaciente = data;
-                $scope.nuevoPaciente.ProximaConsulta = new Date(data.ProximaConsulta);
-                $scope.nuevoPaciente.UltimaConsulta = new Date(data.UltimaConsulta);
-                $scope.listaTratamientos = data.Tratamientos;
-            }, function (error) {
-                $scope.mensajeError = "Ha ocurrido un error cargando datos del paciente";
-            });
-        }
+        Token.get(datosAuth.value, function (data) {
+            token = data.Token;            
+            if (parametro !== "" && !isNaN(parametro)) {
+                $scope.Editando = true;
+                $scope.titulo = "Editar Paciente";
+                $http.defaults.headers.common['Authorization'] = "Bearer " + token;
+                Pacientes.getbyId({ id: parametro }, function (data) {
+                    $scope.nuevoPaciente = data;
+                    $scope.nuevoPaciente.ProximaConsulta = new Date(data.ProximaConsulta);
+                    $scope.nuevoPaciente.UltimaConsulta = new Date(data.UltimaConsulta);
+                    $scope.listaTratamientos = data.Tratamientos;
+                }, function (error) {
+                    $scope.mensajeError = "Ha ocurrido un error cargando datos del paciente";
+                });
+            }
+        }, function (error) {
+            $scope.mensajeError = "Ha ocurrido un error con la autenticación";
+        });
+
+
+        
 
         $scope.GuardarTratamiento = function () {
             if (validarTratamiento()) {
@@ -82,6 +91,7 @@
 
             if (validarPaciente()) {
                 $scope.nuevoPaciente.Tratamientos = angular.copy($scope.listaTratamientos);
+                $http.defaults.headers.common['Authorization'] = "Bearer " + token;
                 Pacientes.save($scope.nuevoPaciente, function (data) {
                     $scope.mensaje = "El paciente se ha guardado correctamente";
                     if (!$scope.Editando) {

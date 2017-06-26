@@ -1,5 +1,5 @@
 ﻿
 (function () {
     'use strict';
-    angular.module('DentistaApp', ['ResourcesService']);
+    angular.module('DentistaApp', ['ResourcesService', 'UtilitiesService']);
 })();

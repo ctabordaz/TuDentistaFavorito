@@ -1,4 +1,5 @@
-﻿using DentistaFavoritoApp.Models;
+﻿using DentistaFavoritoApp.Filters;
+using DentistaFavoritoApp.Models;
 using DentistaFavoritoApp.Repositories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,8 @@ using System.Web.Http;
 
 namespace DentistaFavoritoApp.ApiControllers
 {
-   [RoutePrefix("api/pacientes")]
+    [RoutePrefix("api/pacientes")]
+    [JwtAuthentication]
     public class PacienteController : ApiController
     {
         private IRepository<Paciente> repositorioPaciente;
@@ -28,7 +30,7 @@ namespace DentistaFavoritoApp.ApiControllers
 
         }
 
-        [Route("getAll")]
+        [Route("getAll")]        
         public HttpResponseMessage GetAll()
         {
             try

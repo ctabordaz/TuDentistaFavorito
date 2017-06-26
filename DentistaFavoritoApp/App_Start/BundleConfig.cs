@@ -18,6 +18,7 @@ namespace DentistaFavoritoApp.App_Start
                         "~/Scripts/angular-resource.min.js",
                         "~/Scripts/App/App.js",
                         "~/Scripts/App/Services/ResourcesService.js",
+                        "~/Scripts/App/Services/UtilitiesService.js",
                         "~/Scripts/App/Controllers/HomeController.js",
                         "~/Scripts/App/Controllers/PacienteController.js",
                         "~/Scripts/App/Controllers/CrearPacienteController.js",

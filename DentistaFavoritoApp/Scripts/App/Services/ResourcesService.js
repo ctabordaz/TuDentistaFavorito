@@ -33,5 +33,11 @@
         });
     }]);
 
+    app.factory('Token', ['$resource', 'baseUrl', function ($resource, baseUrl) {
+        return $resource('/api/token', {}, {
+            get: { method: 'Post', url: '/api/token'}
+        });
+    }]);
+
 
 })();
