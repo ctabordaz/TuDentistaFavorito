@@ -8,9 +8,16 @@ using System.Web.Mvc;
 
 namespace DentistaFavoritoApp.Controllers
 {
+    /// <summary>
+    /// Controlador de pagina de inicio
+    /// </summary>
     public class HomeController : Controller
     {
 
+        /// <summary>
+        /// Pagina de inicio
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {   
             return View();

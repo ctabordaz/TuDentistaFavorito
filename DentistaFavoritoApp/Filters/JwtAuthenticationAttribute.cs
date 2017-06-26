@@ -11,11 +11,21 @@ using System.Web.Http.Filters;
 
 namespace DentistaFavoritoApp.Filters
 {
+    /// <summary>
+    /// Filtro para verificar autenticacion con el token JWT
+    /// </summary>
     public class JwtAuthenticationAttribute : Attribute, IAuthenticationFilter
     {
         public string Realm { get; set; }
         public bool AllowMultiple => false;
 
+        /// <summary>
+        /// Verifica que el request venga con el authorization en el header
+        /// y que el token sea valido
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             var request = context.Request;
@@ -42,6 +52,12 @@ namespace DentistaFavoritoApp.Filters
 
 
 
+        /// <summary>
+        /// Verifica el toke y devuelve el usuario asociado
+        /// </summary>
+        /// <param name="token">token a verificar</param>
+        /// <param name="username">parametro de salida nombre de usuario</param>
+        /// <returns></returns>
         private static bool ValidateToken(string token, out string username)
         {
             username = null;
@@ -66,6 +82,11 @@ namespace DentistaFavoritoApp.Filters
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         protected Task<IPrincipal> AuthenticateJwtToken(string token)
         {
             string username;

@@ -8,6 +8,10 @@ namespace DentistaFavoritoApp.App_Start
 {
     public class BundleConfig
     {
+        /// <summary>
+        /// Agrupa los archivos a utililizar por la aplicacion
+        /// </summary>
+        /// <param name="bundles"></param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(

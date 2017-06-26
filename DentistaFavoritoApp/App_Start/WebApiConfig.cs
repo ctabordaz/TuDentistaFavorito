@@ -7,6 +7,10 @@ namespace DentistaFavoritoApp
 {
     public static class WebApiConfig
     {
+        /// <summary>
+        /// Se registra la estructura que van a tener la ruta de los controladores API
+        /// </summary>
+        /// <param name="config"></param>
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services

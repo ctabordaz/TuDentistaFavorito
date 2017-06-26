@@ -9,10 +9,19 @@ using System.Web;
 
 namespace DentistaFavoritoApp.JWT
 {
+    /// <summary>
+    /// Encargada de genererar los tokens validos
+    /// </summary>
     public class JwtManager
     {
       
 
+        /// <summary>
+        /// genera token valido con base a una llave simetrica base 64 almacenada en el web config 
+        /// </summary>
+        /// <param name="usuario">nombre del usuario autenticado</param>
+        /// <param name="tiempoExpirar">tiempo de expiracion del token</param>
+        /// <returns></returns>
         public static string GenerateToken(string usuario, int tiempoExpirar = 20)
         {
             string Secret = ConfigurationManager.AppSettings["Secret"].ToString();

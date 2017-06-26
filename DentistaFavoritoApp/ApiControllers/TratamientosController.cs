@@ -10,22 +10,39 @@ using System.Web.Http;
 
 namespace DentistaFavoritoApp.ApiControllers
 {
+    /// <summary>
+    /// API para administrar los tratamientos
+    /// </summary>
     [RoutePrefix("api/tratamientos")]
     [JwtAuthentication]
     public class TratamientosController : ApiController
     {
+        /// <summary>
+        /// Repositorio de acceso de datos a los tratamientos
+        /// </summary>
         private IRepository<Tratamiento> repositorioTratamientos;
         
+        /// <summary>
+        /// Se inicializa los repositorios
+        /// </summary>
         public TratamientosController()
         {
             this.repositorioTratamientos = new RepositorioTratamiento();
         }
 
+        /// <summary>
+        /// se asignan los repositorios
+        /// </summary>
+        /// <param name="repositorioTratamientos"></param>
         public TratamientosController(IRepository<Tratamiento> repositorioTratamientos)
         {
             this.repositorioTratamientos = repositorioTratamientos;
         }
 
+        /// <summary>
+        /// lista todos los tratamientos registrados
+        /// </summary>
+        /// <returns>lista de tratamientos</returns>
         [Route("getAll")]
         public HttpResponseMessage GetAll()
         {
@@ -41,6 +58,11 @@ namespace DentistaFavoritoApp.ApiControllers
         }
 
 
+        /// <summary>
+        /// Lista todos los trataientos asociados a un paciente
+        /// </summary>
+        /// <param name="id">identificacion del paciente en base de datos</param>
+        /// <returns></returns>
         [Route("getAllbyPaciente")]
         public HttpResponseMessage GetAllPaciente(int id)
         {
@@ -56,6 +78,11 @@ namespace DentistaFavoritoApp.ApiControllers
         }
 
 
+        /// <summary>
+        /// Elimina un tratamiento 
+        /// </summary>
+        /// <param name="Id">identificacion del tratamiento en base de datos</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("delete")]
         public HttpResponseMessage deleteTratamiento(int Id)

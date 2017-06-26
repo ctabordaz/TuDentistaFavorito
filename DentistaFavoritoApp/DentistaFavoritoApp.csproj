@@ -192,6 +192,10 @@
     <Compile Include="Migrations\201706242033401_IdentificacionUnica.Designer.cs">
       <DependentUpon>201706242033401_IdentificacionUnica.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706260312555_AjustesBaseDatos.cs" />
+    <Compile Include="Migrations\201706260312555_AjustesBaseDatos.Designer.cs">
+      <DependentUpon>201706260312555_AjustesBaseDatos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Paciente.cs" />
     <Compile Include="Models\Tratamiento.cs" />
@@ -234,6 +238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706242033401_IdentificacionUnica.resx">
       <DependentUpon>201706242033401_IdentificacionUnica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706260312555_AjustesBaseDatos.resx">
+      <DependentUpon>201706260312555_AjustesBaseDatos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

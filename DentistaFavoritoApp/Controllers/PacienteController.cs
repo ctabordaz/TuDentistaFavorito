@@ -6,18 +6,34 @@ using System.Web.Mvc;
 
 namespace DentistaFavoritoApp.Controllers
 {
+    /// <summary>
+    /// Controlador para la administracion de pacientes
+    /// </summary>
     public class PacienteController : Controller
     {
-        // GET: Paciente
+        
+        /// <summary>
+        /// Pagina de inicio de pacientes
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Pagina para crear pacientes
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Crear()
         {
             return View();
         }
+        /// <summary>
+        /// Pagina para editar pacientes
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Editar(int? id)
         {
             return View("Crear");

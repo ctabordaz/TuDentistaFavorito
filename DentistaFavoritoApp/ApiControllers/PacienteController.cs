@@ -10,19 +10,36 @@ using System.Web.Http;
 
 namespace DentistaFavoritoApp.ApiControllers
 {
+    /// <summary>
+    /// API para administrar los pacientes
+    /// </summary>
     [RoutePrefix("api/pacientes")]
     [JwtAuthentication]
     public class PacienteController : ApiController
     {
+        /// <summary>
+        /// Repositorio de acceso de datos a los pacientes
+        /// </summary>
         private IRepository<Paciente> repositorioPaciente;
+        /// <summary>
+        /// Repositorio de acceso de datos a los tratamientos
+        /// </summary>
         private IRepository<Tratamiento> repositorioTratamientos;
 
+        /// <summary>
+        /// Se inicializan los repositorios
+        /// </summary>
         public PacienteController()
         {
             repositorioPaciente = new RepositorioPaciente();
             this.repositorioTratamientos = new RepositorioTratamiento();
         }
 
+        /// <summary>
+        /// Se asignan los repositorios
+        /// </summary>
+        /// <param name="repositorioPaciente"></param>
+        /// <param name="repositorioTratamientos"></param>
         public PacienteController(IRepository<Paciente> repositorioPaciente, IRepository<Tratamiento> repositorioTratamientos)
         {
             this.repositorioPaciente = repositorioPaciente;
@@ -30,6 +47,10 @@ namespace DentistaFavoritoApp.ApiControllers
 
         }
 
+        /// <summary>
+        /// Lista todos los pacientes registrados
+        /// </summary>
+        /// <returns></returns>
         [Route("getAll")]        
         public HttpResponseMessage GetAll()
         {
@@ -44,6 +65,11 @@ namespace DentistaFavoritoApp.ApiControllers
             }
         }
 
+        /// <summary>
+        /// Devuelve el paciente asociado a un Id
+        /// </summary>
+        /// <param name="id">Identificacion unica en base de datos</param>
+        /// <returns></returns>
         [Route("getbyId")]
         public HttpResponseMessage GetbyId(int id)
         {
@@ -58,6 +84,13 @@ namespace DentistaFavoritoApp.ApiControllers
             }
         }
 
+        /// <summary>
+        /// Guarda o actualiza un paciente en la base de datos y sus tratamientos
+        /// Verifica la diferencia entre los tratamientos a actualizar y los tratamientos en base de datos
+        /// y elimina los que faltan
+        /// </summary>
+        /// <param name="paciente">Paciente a guardar o almacenar</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("save")]
         public HttpResponseMessage Save(Paciente paciente)
@@ -86,6 +119,11 @@ namespace DentistaFavoritoApp.ApiControllers
             }
         }
 
+        /// <summary>
+        /// Elimina un paciente de la base de datos
+        /// </summary>
+        /// <param name="Id">Identificacion del paciente en la base de datos</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("delete")]
         public HttpResponseMessage deletePaciente(int Id)

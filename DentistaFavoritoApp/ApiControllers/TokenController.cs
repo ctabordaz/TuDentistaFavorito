@@ -11,6 +11,9 @@ using System.Web.Http;
 
 namespace DentistaFavoritoApp.ApiControllers
 {
+    /// <summary>
+    /// API para generar el token de acceso
+    /// </summary>
     [RoutePrefix("api/token")]
     [AllowAnonymous]
     public class TokenController : ApiController
@@ -20,6 +23,11 @@ namespace DentistaFavoritoApp.ApiControllers
 
         }
 
+        /// <summary>
+        /// Valida el usuario y genera el token
+        /// </summary>
+        /// <param name="usuario">Usuario que se esta autenticando</param>
+        /// <returns>token de acceso</returns>
         [Route("")]
         [HttpPost]
         public HttpResponseMessage Get(User usuario)
@@ -35,6 +43,11 @@ namespace DentistaFavoritoApp.ApiControllers
             throw new HttpResponseException(HttpStatusCode.Unauthorized);
         }
 
+        /// <summary>
+        /// valida si el usuario es igual al del archivo de configuracion
+        /// </summary>
+        /// <param name="usuario">usuario a validar</param>
+        /// <returns>si el usuario es valido</returns>
         private bool validarUsuario(User usuario)
         {
             try
