@@ -5,6 +5,11 @@
 
 <div ng-controller="PacienteController" ng-cloak>
     <h2>{{titulo}}</h2>
+    <div class="row" ng-if="cargando" >
+        <div class="col-md-6">
+            <img class="loading" src="@Url.Content("~/Content/Images/loading.gif")" />Cargando
+        </div>        
+    </div>
     <div class="row">
         <div class="alert alert-success" role="alert" ng-if="mensaje.length > 0">{{mensaje}}</div>
         <div class="alert alert-danger" role="alert" ng-if="mensajeError.length > 0">{{mensajeError}}</div>

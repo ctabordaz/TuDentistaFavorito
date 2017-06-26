@@ -8,7 +8,7 @@
         $scope.listaTratamientos = [];
         $scope.mensajeError = "";
         $scope.mensaje = "";
-        
+        $scope.cargando = true;
         $scope.tratamientoFechaIni = "";
         $scope.tratamientoFechaFin = "";
         $scope.tratamientoCosto = "";
@@ -66,12 +66,16 @@
                     $scope.nuevoPaciente.ProximaConsulta = new Date(data.ProximaConsulta);
                     $scope.nuevoPaciente.UltimaConsulta = new Date(data.UltimaConsulta);
                     $scope.listaTratamientos = data.Tratamientos;
+                    $scope.cargando = false;
                 }, function (error) {
                     $scope.mensajeError = "Ha ocurrido un error cargando datos del paciente";
+                    $scope.cargando = false;
                 });
             }
+            $scope.cargando = false;
         }, function (error) {
             $scope.mensajeError = "Ha ocurrido un error con la autenticación";
+            $scope.cargando = false;
         });
 
 
@@ -90,6 +94,7 @@
             $scope.mensaje = "";
 
             if (validarPaciente()) {
+                $scope.cargando = true;
                 $scope.nuevoPaciente.Tratamientos = angular.copy($scope.listaTratamientos);
                 $http.defaults.headers.common['Authorization'] = "Bearer " + token;
                 Pacientes.save($scope.nuevoPaciente, function (data) {
@@ -98,10 +103,12 @@
                         inicializarPaciente();
                         inicializarTratamiento();
                         $scope.listaTratamientos = [];
-                    }                    
+                    }
+                    $scope.cargando = false;
                     
                 }, function (error) {
                     $scope.mensajeError = "Ha ocurrido guardando el paciente";
+                    $scope.cargando = false;
                 });
             }
 

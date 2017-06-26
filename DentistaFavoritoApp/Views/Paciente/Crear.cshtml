@@ -11,6 +11,11 @@
         <div class="alert alert-danger" role="alert"  ng-if="mensajeError.length > 0">{{mensajeError}}</div>
         <div class="col-md-5">
             <h2>{{titulo}}</h2>
+            <div class="row" ng-if="cargando">
+                <div class="col-md-6">
+                    <img class="loading" src="@Url.Content("~/Content/Images/loading.gif")" />Cargando
+                </div>
+            </div>
             <form>
                 <div class="form-group">
                     <label>Nombre <span class="invalido">{{pacienteNombre}}</span></label>

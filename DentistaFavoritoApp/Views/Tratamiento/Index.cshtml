@@ -5,6 +5,11 @@
 
 <div ng-controller="TratamientoController" ng-cloak>
     <h2>Tratamientos</h2>
+    <div class="row" ng-if="cargando">
+        <div class="col-md-6">
+            <img class="loading" src="@Url.Content("~/Content/Images/loading.gif")" />Cargando
+        </div>
+    </div>
     <div class="alert alert-success" role="alert" ng-if="mensaje.length > 0">{{mensaje}}</div>
     <div class="alert alert-danger" role="alert" ng-if="mensajeError.length > 0">{{mensajeError}}</div>
     <div class="row" ng-if="existeCliente">
@@ -32,6 +37,7 @@
                             <th>Costo</th>
                             <th>Detalle</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tr ng-repeat="tratamiento in listaTratamiento track by $index">
@@ -39,7 +45,8 @@
                         <td>{{tratamiento.FechaConclusion | date :'yyyy-MM-dd'}}</td>
                         <td>{{tratamiento.Costo | currency}}</td>
                         <td>{{tratamiento.Detalle}}</td>
-                        <td><span class="glyphicon glyphicon-remove cursor" aria-hidden="true" ng-click="Eliminar(tratamiento.Id,$index)"></span></td>
+                        <td><a href="/Paciente/Editar/{{tratamiento.Paciente_Id}}"><span class="glyphicon glyphicon-pencil cursor" aria-hidden="true"></span></a></td>
+                        <td><a><span class="glyphicon glyphicon-remove cursor" aria-hidden="true" ng-click="Eliminar(tratamiento.Id,$index)"></span></a></td>
                     </tr>
                 </table>
             </div>
