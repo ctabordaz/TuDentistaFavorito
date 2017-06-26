@@ -26,6 +26,12 @@
             {{paciente.Edad}}
         </div>
     </div>
+    <br />
+    <div class="row" ng-if="listaTratamiento.length > 0">
+        <div class="col-md-6">
+            <a ng-click="VerTodos()" class="cursor"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> {{textoPaginar}}</a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive" ng-if="listaTratamiento.length>0">
@@ -40,7 +46,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tr ng-repeat="tratamiento in listaTratamiento track by $index">
+                    <tr ng-repeat="tratamiento in listaTratamientoMostrar track by $index">
                         <td>{{tratamiento.FechaInicio | date :'yyyy-MM-dd'}}</td>
                         <td>{{tratamiento.FechaConclusion | date :'yyyy-MM-dd'}}</td>
                         <td>{{tratamiento.Costo | currency}}</td>
@@ -50,6 +56,7 @@
                     </tr>
                 </table>
             </div>
+            <uib-pagination first-text="Primera" last-text="Ultima" next-text="Siguiente" previous-text="Anterior" total-items="listaTratamiento.length" boundary-links="true" ng-model="pagina" items-per-page="elementosPagina" max-size="10"></uib-pagination>
             <div ng-if="!listaTratamiento.length>0">
                 <div class="alert alert-info" role="alert">No hay tratamientos para este paciente</div>
             </div>

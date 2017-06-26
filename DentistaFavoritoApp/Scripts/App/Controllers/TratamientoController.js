@@ -4,11 +4,17 @@
 
         $scope.titulo = "Tratamientos";
         $scope.listaTratamiento = [];
+        $scope.listaTratamientoMostrar = [];
         $scope.mensaje = "";
         $scope.mensajeError = "";
         $scope.paciente = {};
         $scope.existeCliente = false;
         $scope.cargando = true;
+        $scope.pagina = 1;
+        $scope.elementosPagina = 20;
+        $scope.paginar = true;
+        $scope.textoPaginar = "Ver Todos";
+
         var urlArray = $location.absUrl().split('/');
         var parametro = urlArray[urlArray.length - 1];
         var token = "";
@@ -19,6 +25,7 @@
             if (parametro == "" || parametro == null || isNaN(parametro)) {
                 $scope.listaTratamiento = Tratamientos.getAll({}, function (data) {
                     $scope.cargando = false;
+                    paginar($scope.pagina);
                 }, function (error) {
                     $scope.mensajeError = "Ha ocurrido un error cargando los tratamientos";
                     $scope.cargando = false;
@@ -28,6 +35,7 @@
                     $scope.existeCliente = true;
                     $scope.listaTratamiento = data.Tratamientos;
                     $scope.cargando = false;
+                    paginar($scope.pagina);
                 }, function (error) {
                     $scope.mensajeError = "Ha ocurrido un error cargando datos del paciente";
                     $scope.cargando = false;
@@ -38,12 +46,6 @@
             $scope.mensajeError = "Ha ocurrido un error con la autenticación";
             $scope.cargando = false;
         });
-
-
-        
-
-        
-
 
         $scope.Eliminar = function (id, index) {
             $scope.mensaje = "";
@@ -56,10 +58,35 @@
                 });
                 $scope.mensaje = "El tratamiento ha sido eliminado correctamente;"
                 $scope.cargando = false;
+                paginar($scope.pagina);
             }, function (error) {
                 $scope.mensajeError = "Ha ocurrido un error elimando el tratamiento";
                 $scope.cargando = false;
             })
+        }
+
+        $scope.$watch('pagina', function () {
+            paginar($scope.pagina);
+        });
+
+        function paginar(pagina) {
+            $scope.pagina = pagina;
+            var pagedData = $scope.listaTratamiento.slice((pagina - 1) * $scope.elementosPagina, pagina * $scope.elementosPagina);
+            $scope.listaTratamientoMostrar = pagedData;
+        }
+
+        $scope.VerTodos = function () {
+            $scope.cargando = true;
+            $scope.paginar = !$scope.paginar;
+            if ($scope.paginar) {
+                $scope.elementosPagina = 20;
+                $scope.textoPaginar = "Ver Todos";
+            } else {
+                $scope.elementosPagina = $scope.listaTratamiento.length;
+                $scope.textoPaginar = "Paginar";
+            }
+            paginar($scope.pagina);
+            $scope.cargando = false;
         }
     }]);
 })();

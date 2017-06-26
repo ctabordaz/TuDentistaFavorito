@@ -10,6 +10,11 @@
             <img class="loading" src="@Url.Content("~/Content/Images/loading.gif")" />Cargando
         </div>        
     </div>
+    <div class="row" ng-if="pacientesLista.length > 0">
+        <div class="col-md-6">
+            <a ng-click="VerTodos()" class="cursor"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> {{textoPaginar}}</a>
+        </div>
+    </div>
     <div class="row">
         <div class="alert alert-success" role="alert" ng-if="mensaje.length > 0">{{mensaje}}</div>
         <div class="alert alert-danger" role="alert" ng-if="mensajeError.length > 0">{{mensajeError}}</div>
@@ -29,7 +34,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tr ng-repeat="paciente in pacientesLista track by $index">
+                    <tr ng-repeat="paciente in pacientesListaMostrar track by $index">
                         <td>{{paciente.Nombre}}</td>
                         <td>{{paciente.Identificacion}}</td>
                         <td>{{paciente.Edad}}</td>
@@ -43,6 +48,7 @@
                     </tr>
                 </table>
             </div>
+            <uib-pagination first-text="Primera"  last-text="Ultima" next-text="Siguiente" previous-text="Anterior" total-items="pacientesLista.length" boundary-links="true" ng-model="pagina" items-per-page="elementosPagina" max-size="10"></uib-pagination>
             <div ng-if="!pacientesLista.length>0">
                 <div class="alert alert-info" role="alert">No hay pacientes registrados</div>
             </div>
