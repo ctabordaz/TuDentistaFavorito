@@ -23,13 +23,13 @@ namespace DentistaFavoritoApp.Entity
         /// <summary>
         /// Lista de entidades de paciente
         /// </summary>
-        public DbSet<Paciente> Pacientes { get; set; } 
+        public virtual DbSet<Paciente> Pacientes { get; set; } 
 
 
         /// <summary>
         /// Lista de entidades de tratamientos
         /// </summary>
-        public DbSet<Tratamiento> Tratamientos { get; set; }
+        public virtual DbSet<Tratamiento> Tratamientos { get; set; }
 
         /// <summary>
         /// Se definen las caracteristicas de las entidades en base de datos
