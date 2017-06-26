@@ -159,6 +159,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="SQL_Scripts\database_create.sql" />
+    <Content Include="SQL_Scripts\insert_script.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
