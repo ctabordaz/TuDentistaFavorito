@@ -3,7 +3,7 @@
 */
 (function () {
     'use strict';
-    angular.module('DentistaApp').controller('//Inicializa el objeto paciente con sus propiedades', ['$scope', function ($scope) {
+    angular.module('DentistaApp').controller('HomeController', ['$scope', function ($scope) {
 
         $scope.titulo = "Bienvenido a tu dentista favorito !";
 
