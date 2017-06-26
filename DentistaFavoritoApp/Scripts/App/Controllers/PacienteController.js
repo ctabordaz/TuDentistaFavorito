@@ -1,4 +1,10 @@
-﻿(function () {
+﻿/*
+    controlador: PacienteController
+    encargado de cargar la lista de todos los pacientes
+
+*/
+
+(function () {
     'use strict';
     angular.module('DentistaApp').controller('PacienteController', ['$scope', 'Pacientes', 'datosAuth', 'Token', '$http', function ($scope, Pacientes, datosAuth, Token, $http) {
 
@@ -15,6 +21,12 @@
 
         var token = "";
         
+
+        /*
+            Se obtiene el toke de autenticacion y de se llama la api de pacientes
+            para traer a todos lo pacientes 
+            se envia el token en el header del request
+        */
         Token.get(datosAuth.value, function (data) {
             token = data.Token;
             $http.defaults.headers.common['Authorization'] = "Bearer " + token ;
@@ -31,6 +43,10 @@
             $scope.cargando = false;
         });
 
+        /*
+            Se elimina un paciente utilizando la api de pacientes y enviandole
+            el token en el header del request
+        */
         $scope.Eliminar = function (id, index) {
             $scope.cargando = true;
             $http.defaults.headers.common['Authorization'] = "Bearer " + token;
@@ -47,16 +63,28 @@
             });
         };
 
+        /*
+            Observa si ha cambiado la pagina 
+            de ser asi carga la pagina nueva
+        */
         $scope.$watch('pagina', function () {
             paginar($scope.pagina);
         });
 
+
+        /*
+            se encarga de cargar la nueva pagina filtrando la lista completa
+        */
         function paginar(pagina) {
             $scope.pagina = pagina;
             var pagedData = $scope.pacientesLista.slice((pagina - 1) * $scope.elementosPagina, pagina * $scope.elementosPagina);
             $scope.pacientesListaMostrar = pagedData;
         }
 
+
+        /*
+            se encarga de mostrar todos los elementos en una sola pagina
+        */
         $scope.VerTodos = function () {
             $scope.cargando = true;
             $scope.paginar = !$scope.paginar;

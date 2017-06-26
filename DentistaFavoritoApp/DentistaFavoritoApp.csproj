@@ -152,6 +152,7 @@
     <Content Include="Scripts\App\Controllers\TratamientoController.js" />
     <Content Include="Scripts\App\Services\ResourcesService.js" />
     <Content Include="Scripts\App\Services\UtilitiesService.js" />
+    <Content Include="Scripts\ui-bootstrap.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

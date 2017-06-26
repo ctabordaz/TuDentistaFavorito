@@ -1,21 +1,15 @@
-﻿(function () {
+﻿/*
+    Servicio de recursos para los llamados a las apis
+
+*/
+
+(function () {
     'use strict';
 
     var app = angular.module('ResourcesService', ['ngResource'])
 
-    app.factory('baseUrl', ['$location', function ($location) {
-        var url = $location.absUrl();
-
-        return url;
-    }]);
-
-    app.factory('pathUrl', ['$location', function ($location) {
-        var url = '';
-        return url;
-    }]);
-
-
-    app.factory('Pacientes', ['$resource', 'baseUrl', function ($resource, baseUrl) {
+    //Recursos de la api de pacientes
+    app.factory('Pacientes', ['$resource',  function ($resource) {
         return $resource( '/api/pacientes', {}, {
             getAll: { method: 'GET', url: '/api/pacientes/getAll', params: {}, isArray: true },
             getbyId: { method: 'GET', url: '/api/pacientes/getbyId' },
@@ -24,16 +18,18 @@
         });
     }]);
 
-    app.factory('Tratamientos', ['$resource', 'baseUrl', function ($resource, baseUrl) {
-        return $resource('/api/tratamiento', {}, {
-            getAll: { method: 'GET', url: '/api/tratamiento/getAll', params: {}, isArray: true },
-            getAllbyPaciente: { method: 'GET', url: '/api/tratamiento/getAllbyPaciente', isArray: true },
-            save: { method: 'Post', url: '/api/tratamiento/save' },
-            deleteTratamiento: { method: 'GET', url: '/api/tratamiento/delete' }
+    //Recurso de la api de tratamientos
+    app.factory('Tratamientos', ['$resource',  function ($resource) {
+        return $resource('/api/tratamientos', {}, {
+            getAll: { method: 'GET', url: '/api/tratamientos/getAll', params: {}, isArray: true },
+            getAllbyPaciente: { method: 'GET', url: '/api/tratamientos/getAllbyPaciente', isArray: true },
+            save: { method: 'Post', url: '/api/tratamientos/save' },
+            deleteTratamiento: { method: 'GET', url: '/api/tratamientos/delete' }
         });
     }]);
 
-    app.factory('Token', ['$resource', 'baseUrl', function ($resource, baseUrl) {
+    //Recurso de la api de token
+    app.factory('Token', ['$resource',  function ($resource) {
         return $resource('/api/token', {}, {
             get: { method: 'Post', url: '/api/token'}
         });

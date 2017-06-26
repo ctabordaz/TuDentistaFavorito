@@ -1,4 +1,9 @@
-﻿(function () {
+﻿/*
+    Controlador TratamientoController
+    encargado de mostrar todos los tratamientos
+*/
+
+(function () {
     'use strict';
     angular.module('DentistaApp').controller('TratamientoController', ['$scope', '$location', 'Tratamientos', 'Pacientes', 'datosAuth', 'Token', '$http', function ($scope, $location, Tratamientos, Pacientes, datosAuth, Token, $http) {
 
@@ -19,6 +24,12 @@
         var parametro = urlArray[urlArray.length - 1];
         var token = "";
 
+
+        /*
+            Se obtiene el toke de autenticacion y de se llama la api de tratamientos
+            para traer a todos lo tratamientos 
+            se envia el token en el header del request
+        */
         Token.get(datosAuth.value, function (data) {
             token = data.Token;
             $http.defaults.headers.common['Authorization'] = "Bearer " + token;
@@ -47,6 +58,11 @@
             $scope.cargando = false;
         });
 
+
+        /*
+            Se elimina un tratamiento utilizando la api de tratamientos y enviandole
+            el token en el header del request
+        */
         $scope.Eliminar = function (id, index) {
             $scope.mensaje = "";
             $scope.mensajeError = "";
@@ -65,16 +81,28 @@
             })
         }
 
+
+        /*
+             Observa si ha cambiado la pagina 
+             de ser asi carga la pagina nueva
+         */
         $scope.$watch('pagina', function () {
             paginar($scope.pagina);
         });
 
+
+        /*
+            se encarga de cargar la nueva pagina filtrando la lista completa
+        */
         function paginar(pagina) {
             $scope.pagina = pagina;
             var pagedData = $scope.listaTratamiento.slice((pagina - 1) * $scope.elementosPagina, pagina * $scope.elementosPagina);
             $scope.listaTratamientoMostrar = pagedData;
         }
 
+        /*
+            se encarga de mostrar todos los elementos en una sola pagina
+        */
         $scope.VerTodos = function () {
             $scope.cargando = true;
             $scope.paginar = !$scope.paginar;

@@ -1,4 +1,10 @@
-﻿(function () {
+﻿
+/*
+controlador angular: CrearPacienteController
+Encargado de agregar o editar un paciente y sus tratamientos
+*/
+
+(function () {
     'use strict';
     angular.module('DentistaApp').controller('CrearPacienteController', ['$scope', 'Pacientes', '$location', 'datosAuth', 'Token', '$http', function ($scope, Pacientes, $location, datosAuth, Token, $http) {
 
@@ -27,9 +33,12 @@
 
         var campoInvalido = "Campo Invalido";
         var indexTratamiento = 0;
+        //Se extrae el parametro de la url de tenerlo
         var urlArray = $location.absUrl().split('/');
         var parametro = urlArray[urlArray.length - 1];
         var token = "";
+
+        //Inicializa el objeto paciente con sus propiedades
         var inicializarPaciente = function () {
             $scope.nuevoPaciente = {
                 Id: 0,
@@ -43,6 +52,7 @@
             };
         };
 
+        //Inicializa el objeto tratamiento con sus propiedades
         var inicializarTratamiento = function () {
             $scope.nuevoTratamiento = {
                 FechaInicio: "",
@@ -55,6 +65,12 @@
         inicializarPaciente();
         inicializarTratamiento();
 
+
+        /*
+        Obtiene el token enviandole las credenciales
+        si la variable parametro es un numero procede a llamar la api de pacientes
+        para traer la informacion del paciente que se va a editar
+        */
         Token.get(datosAuth.value, function (data) {
             token = data.Token;            
             if (parametro !== "" && !isNaN(parametro)) {
@@ -80,7 +96,9 @@
 
 
         
-
+        /*
+        Se encarga de guardar los tratamientos un un array
+        */
         $scope.GuardarTratamiento = function () {
             if (validarTratamiento()) {
                 $scope.nuevoTratamiento.Paciente_Id = $scope.nuevoPaciente.Id;
@@ -89,6 +107,10 @@
             }
         };
 
+        /*
+            Guarda o actualizar el paciente utilizando la api de pacientes y 
+            enviadole el token en el encabezado
+        */
         $scope.GuardarPaciente = function () {
             $scope.mensajeError = "";
             $scope.mensaje = "";
@@ -114,13 +136,19 @@
 
         };
 
-
+        /*
+            Elimina un tratamiento del array de tratamientos con el index
+        */
         $scope.EliminarTratamiento = function (index) {
             $scope.listaTratamientos = $scope.listaTratamientos.filter(function (element, i) {
                 return i !== index;
             });
         }
 
+        /*
+            carga un tratamiento en el formulario de tratamiento para que pueda
+            ser editado
+        */
         $scope.EditarTratamiento = function (index) {
             indexTratamiento = index;
             $scope.EditandoTratamiento = true;
@@ -129,6 +157,11 @@
             $scope.nuevoTratamiento.FechaConclusion = new Date($scope.listaTratamientos[index].FechaConclusion);
         }
 
+
+        /*
+            se actualizar el tratamiento que se estaba editando en el
+            array de tratamientos
+        */
         $scope.ActualizarTratamiento = function () {
             if (validarTratamiento()) {
                 $scope.listaTratamientos[indexTratamiento] = angular.copy($scope.nuevoTratamiento);
@@ -139,6 +172,11 @@
             
         }
 
+
+        /*
+            valida si el formulario de tratamiento es valido para despues
+            agregarlo al array de tratamientos
+        */
         var validarTratamiento = function () {
 
             $scope.tratamientoFechaIni = "";
@@ -169,6 +207,10 @@
             return valido;
         };
 
+        /*
+            valida si el formulario del paciente es valido para despues
+            llamar la api de pacientes
+        */
         var validarPaciente = function () {
             var valido = true;
             $scope.pacienteNombre = "";

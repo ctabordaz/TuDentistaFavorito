@@ -33,7 +33,8 @@ namespace DentistaFavoritoApp.App_Start
                      "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/ui-bootstrap.js"));
 
             BundleTable.EnableOptimizations = false;
         }
