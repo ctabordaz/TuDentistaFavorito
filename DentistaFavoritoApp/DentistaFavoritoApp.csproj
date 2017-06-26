@@ -163,7 +163,7 @@
   <ItemGroup>
     <Compile Include="ApiControllers\PacienteController.cs" />
     <Compile Include="ApiControllers\TokenController.cs" />
-    <Compile Include="ApiControllers\TratamientosController.cs" />
+    <Compile Include="ApiControllers\TratamientoController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

@@ -25,11 +25,11 @@
     }]);
 
     app.factory('Tratamientos', ['$resource', 'baseUrl', function ($resource, baseUrl) {
-        return $resource('/api/tratamientos', {}, {
-            getAll: { method: 'GET', url: '/api/tratamientos/getAll', params: {}, isArray: true },
-            getAllbyPaciente: { method: 'GET', url: '/api/tratamientos/getAllbyPaciente', isArray: true },
-            save: { method: 'Post', url: '/api/tratamientos/save' },
-            deleteTratamiento: { method: 'GET', url: '/api/tratamientos/delete' }
+        return $resource('/api/tratamiento', {}, {
+            getAll: { method: 'GET', url: '/api/tratamiento/getAll', params: {}, isArray: true },
+            getAllbyPaciente: { method: 'GET', url: '/api/tratamiento/getAllbyPaciente', isArray: true },
+            save: { method: 'Post', url: '/api/tratamiento/save' },
+            deleteTratamiento: { method: 'GET', url: '/api/tratamiento/delete' }
         });
     }]);
 

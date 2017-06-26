@@ -40,7 +40,7 @@ namespace DentistaFavoritoApp.ApiControllers
                 };
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
-            throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            return Request.CreateResponse(HttpStatusCode.Unauthorized);
         }
 
         /// <summary>

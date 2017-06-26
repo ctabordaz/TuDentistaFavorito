@@ -15,7 +15,7 @@ namespace DentistaFavoritoApp.ApiControllers
     /// </summary>
     [RoutePrefix("api/tratamientos")]
     [JwtAuthentication]
-    public class TratamientosController : ApiController
+    public class TratamientoController : ApiController
     {
         /// <summary>
         /// Repositorio de acceso de datos a los tratamientos
@@ -25,7 +25,7 @@ namespace DentistaFavoritoApp.ApiControllers
         /// <summary>
         /// Se inicializa los repositorios
         /// </summary>
-        public TratamientosController()
+        public TratamientoController()
         {
             this.repositorioTratamientos = new RepositorioTratamiento();
         }
@@ -34,7 +34,7 @@ namespace DentistaFavoritoApp.ApiControllers
         /// se asignan los repositorios
         /// </summary>
         /// <param name="repositorioTratamientos"></param>
-        public TratamientosController(IRepository<Tratamiento> repositorioTratamientos)
+        public TratamientoController(IRepository<Tratamiento> repositorioTratamientos)
         {
             this.repositorioTratamientos = repositorioTratamientos;
         }

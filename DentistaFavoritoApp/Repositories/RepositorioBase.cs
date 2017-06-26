@@ -49,7 +49,7 @@ namespace DentistaFavoritoApp.Repositories
         /// </summary>
         /// <param name="entity">entidad a añadir o actualizar</param>
         /// <returns></returns>
-        public T AddOrUpdate(T entity)
+        public virtual T AddOrUpdate(T entity)
         {
             dbSet.AddOrUpdate(entity);
             dbContext.SaveChanges();
@@ -80,7 +80,7 @@ namespace DentistaFavoritoApp.Repositories
         /// </summary>
         /// <param name="where">condicion de busqueda</param>
         /// <returns></returns>
-        public IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
+        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
         {
             return dbSet.Where(where).ToList();
         }
@@ -89,7 +89,7 @@ namespace DentistaFavoritoApp.Repositories
         /// Elimina una entidad en base de datos
         /// </summary>
         /// <param name="entity">entidad a eliminar</param>
-        public void Remove(T entity)
+        public virtual void Remove(T entity)
         {
             dbSet.Remove(entity);
             dbContext.SaveChanges();            
@@ -99,7 +99,7 @@ namespace DentistaFavoritoApp.Repositories
         /// Elimina una lista de entidades en base de datos
         /// </summary>
         /// <param name="entity">lista de entidades a eliminar</param>
-        public void RemoveRange(IEnumerable<T> entity)
+        public virtual void RemoveRange(IEnumerable<T> entity)
         {
             foreach (var entityToRemove in entity)
             {
